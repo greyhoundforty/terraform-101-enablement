@@ -1,0 +1,28 @@
+[tools]
+python = "3.12"
+node = "22"
+
+# ---- Slidev deck for the IaC lunch and learn (lives in slides/) ----
+
+[tasks."slides:install"]
+description = "Install the Slidev dependencies"
+dir = "slides"
+run = "npm install"
+
+[tasks.slides]
+description = "Run the deck with live reload (opens the browser)"
+dir = "slides"
+depends = ["slides:install"]
+run = "npx slidev slides.md --open"
+
+[tasks."slides:build"]
+description = "Build the deck as a static site in slides/dist"
+dir = "slides"
+depends = ["slides:install"]
+run = "npx slidev build slides.md"
+
+[tasks."slides:export"]
+description = "Export the deck to PDF in slides/dist"
+dir = "slides"
+depends = ["slides:install"]
+run = "npx slidev export slides.md --format pdf --output dist/terraform-lunch-and-learn.pdf"

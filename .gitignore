@@ -1,0 +1,8 @@
+# Saved IBM Cloud login session. Treat it like a credential.
+auth.json
+.venv/
+__pycache__/
+slides/node_modules/
+slides/dist/
+.deck-transfer.tar.gz
+_to_delete/

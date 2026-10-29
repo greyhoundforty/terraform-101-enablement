@@ -1,0 +1,361 @@
+/*
+  Carbon "White" theme for Slidev.
+  Token values come from the Carbon color foundations (white theme):
+    background  #ffffff     layer-01   #f4f4f4 (Gray 10)
+    text        #161616     text-2     #525252
+    border      #e0e0e0     interactive #0f62fe (Blue 60)
+  Meaning of color in this deck (keep it consistent from slide to slide):
+    Blue   = DESIRED state (your code)
+    Purple = CURRENT state (state file, IBM Cloud)
+    Green / Red / Yellow = good / bad / warning
+*/
+:root {
+  --cds-bg: #ffffff;
+  --cds-layer: #f4f4f4;
+  --cds-layer-2: #e8e8e8;
+  --cds-border: #e0e0e0;
+  --cds-border-strong: #8d8d8d;
+  --cds-text: #161616;
+  --cds-text-2: #525252;
+  --cds-blue: #0f62fe;
+  --cds-blue-hover: #0050e6;
+  --cds-blue-tint: #edf5ff;
+  --cds-blue-text: #0043ce;
+  --cds-purple: #8a3ffc;
+  --cds-purple-tint: #f6f2ff;
+  --cds-purple-text: #6929c4;
+  --cds-green: #198038;
+  --cds-green-tint: #defbe6;
+  --cds-red: #da1e28;
+  --cds-red-tint: #fff1f1;
+  --cds-yellow: #f1c21b;
+  --cds-yellow-tint: #fcf4d6;
+  --slidev-theme-primary: #0f62fe;
+  --font-plex-sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-plex-mono: 'IBM Plex Mono', Menlo, Consolas, monospace;
+}
+
+/* ---------- base slide ---------- */
+/* The page is white. The layout itself stays transparent so the footer
+   (global-bottom.vue, drawn underneath the layout) stays visible. */
+.slidev-slide-content { background: var(--cds-bg); }
+.slidev-layout {
+  padding: 44px 64px 64px;
+  color: var(--cds-text);
+  font-size: 22px;
+  line-height: 1.45;
+}
+.slidev-layout h1 {
+  margin: 0 0 20px;
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--cds-text);
+}
+.slidev-layout h1 + p { opacity: 1; }
+/* The default theme sets p { line-height: 1.5rem }; reset it so big text
+   (hero, lede) can size its own lines. */
+.slidev-layout p { margin: 0 0 12px; line-height: 1.45; }
+.slidev-layout strong { font-weight: 600; }
+.slidev-layout a { color: var(--cds-blue); border: 0; }
+.slidev-layout ul { padding-left: 1.2em; }
+.slidev-layout li { margin: 6px 0; }
+.slidev-layout li::marker { color: var(--cds-text-2); }
+
+/* small label above a slide title */
+.kicker {
+  margin: 0 0 14px !important;
+  font-family: var(--font-plex-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cds-text-2);
+}
+.kicker b { color: var(--cds-blue); font-weight: 600; }
+
+/* big statement text */
+.slidev-layout .hero {
+  margin: 0 0 18px !important;
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  max-width: 22ch;
+}
+.slidev-layout .hero.wide { max-width: 26ch; }
+.hero em { font-style: normal; color: var(--cds-blue); }
+.slidev-layout .lede { font-size: 24px; color: var(--cds-text-2); max-width: 46ch; }
+.dim { color: var(--cds-text-2); }
+.small { font-size: 17px; }
+.mono { font-family: var(--font-plex-mono); }
+
+/* ---------- tiles ---------- */
+.tiles { display: grid; gap: 16px; margin-top: 24px; }
+.tiles.c2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.tiles.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.tiles.c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.tile {
+  background: var(--cds-layer);
+  padding: 24px 22px 26px;
+  min-width: 0;
+}
+.tile svg { font-size: 38px; color: var(--cds-blue); margin-bottom: 18px; display: block; }
+.tile h3 { margin: 0 0 8px; font-size: 24px; font-weight: 600; line-height: 1.2; }
+.tile p { margin: 0; font-size: 19px; color: var(--cds-text-2); line-height: 1.4; }
+.tiles.c4 .tile { padding: 22px 18px 24px; }
+.tiles.c4 .tile h3 { font-size: 22px; }
+.tiles.c4 .tile p { font-size: 17px; }
+.tile.purple svg { color: var(--cds-purple); }
+.tile.red svg { color: var(--cds-red); }
+.tile.green svg { color: var(--cds-green); }
+.tile.blue-bg { background: var(--cds-blue-tint); }
+.tile.purple-bg { background: var(--cds-purple-tint); }
+
+/* ---------- tags ---------- */
+.tag {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  background: var(--cds-layer-2);
+  color: var(--cds-text);
+}
+.tag.blue { background: #d0e2ff; color: var(--cds-blue-text); }
+.tag.purple { background: #e8daff; color: var(--cds-purple-text); }
+.tag.green { background: #a7f0ba; color: #044317; }
+.tag.red { background: #ffd7d9; color: #750e13; }
+
+/* ---------- step chips (portal click path) ---------- */
+.steps { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; max-width: 840px; }
+.step {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px 12px 14px;
+  background: var(--cds-layer);
+  font-size: 22px;
+}
+.step i {
+  font-style: normal;
+  font-family: var(--font-plex-mono);
+  font-size: 13px;
+  color: var(--cds-text-2);
+}
+
+/* ---------- code ---------- */
+.slidev-layout pre.slidev-code,
+.slidev-layout .slidev-code-wrapper pre {
+  background: var(--cds-layer) !important;
+  border-radius: 0;
+  font-size: 17px;
+  line-height: 1.55;
+  padding: 18px 20px !important;
+  margin: 0;
+}
+.slidev-layout code { font-family: var(--font-plex-mono); }
+/* Lines that are not the current click step: dimmed, but still readable
+   from the back of a room (Slidev's default is 0.3). */
+.slidev-layout pre.slidev-code .line.slidev-code-dishonored { opacity: 0.45; }
+/* Size variants for code blocks that have room to grow or need to fit. */
+.bigcode pre.slidev-code { font-size: 21px !important; }
+.compact pre.slidev-code { font-size: 15px !important; line-height: 1.45 !important; }
+.nowrap { white-space: nowrap; }
+.slidev-layout :not(pre) > code {
+  background: var(--cds-layer);
+  padding: 1px 6px;
+  font-size: 0.9em;
+  color: var(--cds-text);
+}
+.code-label {
+  margin: 0 0 6px !important;
+  font-family: var(--font-plex-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cds-text-2);
+}
+
+/* ---------- two-up compare ---------- */
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; margin-top: 18px; }
+.cols.wide-left { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+.col h3 { margin: 0 0 10px; font-size: 22px; font-weight: 600; }
+.col-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.col-head h3 { margin: 0; }
+
+.imperative { list-style: none; padding: 0 !important; margin: 0; }
+.imperative li {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 12px 16px;
+  background: var(--cds-layer);
+  font-size: 21px;
+}
+.imperative li::marker { content: ''; }
+
+/* ---------- terminal-style result block ---------- */
+.slidev-layout pre.term {
+  margin: 0;
+  background: #161616;
+  color: #f4f4f4;
+  font-family: var(--font-plex-mono);
+  font-size: 18px;
+  line-height: 1.65;
+  padding: 18px 22px;
+  overflow: hidden;
+}
+.term .ok { color: #42be65; }
+.term .warn { color: #f1c21b; }
+.term .bad { color: #ff8389; }
+.term .dim { color: #a8a8a8; }
+
+/* ---------- desired / current diagram ---------- */
+.legend { display: flex; gap: 18px; margin-top: 4px; font-size: 15px; color: var(--cds-text-2); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { width: 14px; height: 14px; display: inline-block; }
+.legend .d { background: var(--cds-blue); }
+.legend .c { background: var(--cds-purple); }
+
+.triad { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; margin-top: 22px; }
+.node {
+  padding: 18px 20px 20px;
+  min-width: 0;
+  border-top: 4px solid transparent;
+}
+.node.desired { background: var(--cds-blue-tint); border-top-color: var(--cds-blue); }
+.node.current { background: var(--cds-purple-tint); border-top-color: var(--cds-purple); }
+.node .lbl {
+  font-family: var(--font-plex-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.node.desired .lbl { color: var(--cds-blue-text); }
+.node.current .lbl { color: var(--cds-purple-text); }
+.node .nm { margin: 6px 0 2px; font-size: 28px; font-weight: 600; line-height: 1.2; }
+.node .sub { font-size: 18px; color: var(--cds-text-2); }
+.node .val {
+  margin-top: 16px;
+  padding: 8px 12px;
+  background: var(--cds-bg);
+  font-family: var(--font-plex-mono);
+  font-size: 17px;
+}
+.node .val.gap { background: var(--cds-yellow-tint); font-weight: 600; }
+
+.slidev-layout .verdict {
+  margin: 20px 0 0;
+  padding: 16px 20px;
+  background: var(--cds-yellow-tint);
+  font-size: 23px;
+}
+.verdict b { font-weight: 600; }
+
+/* ---------- workflow columns (write / plan / apply) ---------- */
+.flow { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+.flow .stage { background: var(--cds-layer); padding: 22px 22px 24px; min-width: 0; }
+.flow .stage .cmd { font-family: var(--font-plex-mono); font-size: 32px; font-weight: 500; }
+.flow .stage .what { margin: 8px 0 16px; font-size: 22px; }
+.flow .stage .rw { font-size: 18px; color: var(--cds-text-2); line-height: 1.55; }
+.flow .stage .rw b { color: var(--cds-text); font-weight: 600; }
+
+/* ---------- vocabulary list next to highlighted code ---------- */
+.vocab { display: grid; gap: 10px; align-content: start; }
+.vocab .term-row {
+  padding: 12px 16px;
+  background: var(--cds-layer);
+  opacity: 0.55;
+  transition: opacity 200ms ease, background 200ms ease;
+}
+.vocab .term-row.on { opacity: 1; background: var(--cds-blue-tint); }
+.vocab .term-row b { display: block; font-family: var(--font-plex-mono); font-size: 20px; font-weight: 600; }
+.vocab .term-row span { font-size: 18px; color: var(--cds-text-2); }
+
+/* ---------- bottom-of-slide takeaway ---------- */
+.slidev-layout .takeaway {
+  margin-top: 26px !important;
+  padding-top: 16px;
+  border-top: 1px solid var(--cds-border);
+  font-size: 24px;
+}
+
+/* ---------- question / answer rows (auditability) ---------- */
+.qa { margin-top: 22px; }
+.qa-row {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1.5fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--cds-border);
+  font-size: 22px;
+}
+.qa-row b { font-weight: 600; }
+.qa-row span:nth-child(2) { color: var(--cds-text-2); }
+.qa-row span:nth-child(3) { color: var(--cds-blue-text); }
+.qa-head {
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--cds-text);
+  font-family: var(--font-plex-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.qa-head span:nth-child(2) { color: var(--cds-text-2); }
+
+/* ---------- smaller tiles and terminals ---------- */
+.tiles.tight { gap: 12px; }
+.tiles.tight .tile { padding: 16px 18px 18px; }
+.tiles.tight .tile h3 { font-size: 22px; margin-bottom: 4px; }
+.tiles.tight .tile h3.mono { font-family: var(--font-plex-mono); font-size: 18px; font-weight: 500; }
+.tiles.tight .tile p { font-size: 17px; }
+.slidev-layout pre.term.md { font-size: 16px; padding: 16px 18px; }
+.slidev-layout pre.term.sm { font-size: 14px; padding: 14px 16px; }
+.tiny pre.slidev-code { font-size: 14px !important; line-height: 1.45 !important; }
+
+/* ---------- series roadmap ---------- */
+.road .when {
+  margin-bottom: 10px;
+  font-family: var(--font-plex-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cds-text-2);
+}
+.road.now { background: var(--cds-blue-tint); }
+.road.now .when { color: var(--cds-blue-text); font-weight: 600; }
+.road h3 { font-size: 22px; }
+.road p { font-size: 17px; }
+.road .pain { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--cds-border-strong); }
+.road .pain b {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-plex-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cds-text-2);
+}
+.road .pain span { font-size: 16px; line-height: 1.35; display: block; }
+
+/* ---------- footer (global-bottom.vue) ---------- */
+.deck-footer {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-plex-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cds-text-2);
+}
+
+/* motion for reveals: short and plain */
+.slidev-vclick-target { transition: opacity 180ms ease; }

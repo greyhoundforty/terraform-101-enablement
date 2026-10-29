@@ -1,0 +1,17 @@
+{
+  "name": "terraform-lunch-and-learn",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "slidev --open",
+    "build": "slidev build",
+    "export": "slidev export --format pdf --output dist/terraform-lunch-and-learn.pdf"
+  },
+  "dependencies": {
+    "@iconify-json/carbon": "^1.2.29",
+    "@slidev/cli": "^53.0.0",
+    "@slidev/theme-default": "^0.25.0",
+    "playwright-chromium": "^1.64.1",
+    "vue": "^3.5.44"
+  }
+}
