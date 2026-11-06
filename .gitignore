@@ -1,0 +1,18 @@
+.DS_Store
+.env*
+.venv/
+__pycache__/
+_to_delete/
+
+# Terraform (plain/ and modules/).
+# Commit .terraform.lock.hcl and terraform.tfvars.example. Never commit terraform.tfvars:
+# copy the example with `mise run tfvars:init`. If a file was committed before it was
+# ignored, ignoring is not enough: run `git rm --cached <file>` to stop tracking it.
+.terraform/
+terraform/**/*.tfstate*
+terraform/**/*.tfplan
+terraform/**/tfplan
+terraform/**/*.pem
+terraform/**/crash.log
+terraform/**/*.tfvars
+terraform/**/*.tfvars.json

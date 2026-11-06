@@ -1,0 +1,26 @@
+# terraform.tfvars.example: copy this to terraform.tfvars and edit it:
+#
+#   mise run tfvars:init
+#
+# terraform.tfvars is git-ignored, so your values never get committed.
+# Anything left out uses the default in variables.tf.
+# You can also override any value without editing a file, e.g.:
+#   TF_VAR_instance_count=3 mise run plan
+
+# Name of a resource group that ALREADY exists in your account.
+resource_group_name = "Default"
+
+# Balanced profile from the deck. The demo bumps it to bx2-4x16.
+vsi_profile    = "bx2-2x8"
+instance_count = 2
+
+# Who may SSH in: your own public IP plus /32.
+# 203.0.113.7 is a documentation address, so REPLACE IT or you will not be able to connect.
+ssh_allowed_cidr = "203.0.113.7/32"
+
+# Optional name prefix for every resource. Empty = a random 6-letter prefix.
+project_prefix = ""
+
+# Name of an SSH key that ALREADY exists in this region.
+# Empty = Terraform generates a key pair (read it with: terraform output -raw ssh_private_key).
+existing_ssh_key = ""

@@ -1,0 +1,15 @@
+# Tool versions shared by both demo versions (plain/ and modules/).
+# Tasks live in each folder's own mise.toml; run them from inside that folder.
+[tools]
+fnox = "latest"
+terraform = "1.17"
+
+# Live architecture picture that fills in as Terraform builds (reads the state files).
+# Run from this folder: `mise run viewer`, then apply in another terminal.
+[tasks.viewer]
+description = "Open the live architecture viewer in your browser"
+run = "python3 viewer/server.py --open"
+
+[tasks."viewer:simple"]
+description = "Live viewer, simple fixed layout (one subnet box, same as the original)"
+run = "python3 viewer/server.py --open --simple"

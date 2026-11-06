@@ -1,0 +1,67 @@
+# Tasks for the PLAIN version. Run from this folder: `fnox exec -- mise run plan`.
+# Tool versions (terraform, fnox) come from ../mise.toml.
+#
+# Workspaces: if a file named <workspace>.tfvars exists (for example eu-de.tfvars
+# for the eu-de workspace) it is loaded on top of terraform.tfvars.
+
+[tasks."tfvars:init"]
+description = "Copy terraform.tfvars.example to terraform.tfvars (never overwrites)"
+run = '''
+if [ -f terraform.tfvars ]; then
+  echo "terraform.tfvars already exists, leaving it alone."
+else
+  cp terraform.tfvars.example terraform.tfvars && echo "Created terraform.tfvars. Edit it before you run plan."
+fi
+'''
+
+[tasks.init]
+description = "Download the provider"
+run = "terraform init"
+
+[tasks.fmt]
+description = "Format .tf files"
+run = "terraform fmt -recursive"
+
+[tasks.validate]
+description = "Check syntax and types (no cloud calls)"
+depends = ["init"]
+run = "terraform validate"
+
+[tasks.plan]
+description = "Show what would change (saves the plan as <workspace>.tfplan)"
+depends = ["init"]
+run = '''
+ws="$(terraform workspace show)"
+varfile=""; [ -f "$ws.tfvars" ] && varfile="-var-file=$ws.tfvars"
+terraform plan $varfile -out "$ws.tfplan"
+'''
+
+[tasks.apply]
+description = "Create/update the infrastructure from the saved plan"
+depends = ["init"]
+run = 'terraform apply "$(terraform workspace show).tfplan"'
+
+[tasks.destroy]
+description = "Delete everything this config created"
+run = '''
+ws="$(terraform workspace show)"
+varfile=""; [ -f "$ws.tfvars" ] && varfile="-var-file=$ws.tfvars"
+terraform destroy $varfile
+'''
+
+[tasks.state-list]
+description = "List resources Terraform is tracking"
+run = "terraform state list"
+
+# ---- Workspaces: one state per region -------------------------------------
+[tasks."ws:new"]
+description = "Create a workspace, e.g. mise run ws:new eu-de"
+run = "terraform workspace new {{arg(name=\"name\")}}"
+
+[tasks."ws:select"]
+description = "Switch workspace, e.g. mise run ws:select default"
+run = "terraform workspace select {{arg(name=\"name\")}}"
+
+[tasks."ws:list"]
+description = "List workspaces (* marks the active one)"
+run = "terraform workspace list"
